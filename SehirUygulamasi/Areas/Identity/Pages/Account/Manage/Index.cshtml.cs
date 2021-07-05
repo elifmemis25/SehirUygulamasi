@@ -36,6 +36,14 @@ namespace SehirUygulamasi.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            
+            [Display(Name = "Surname")]
+            public string Surname { get; set; }
         }
 
         private async Task LoadAsync(CetUser user)
@@ -47,7 +55,9 @@ namespace SehirUygulamasi.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Name=user.Name,
+                Surname=user.Surname
             };
         }
 
@@ -76,6 +86,9 @@ namespace SehirUygulamasi.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
+            user.Name = Input.Name;
+            user.Surname = Input.Surname;
+            await _userManager.UpdateAsync(user);
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
