@@ -14,6 +14,7 @@ namespace SehirUygulamasi.Data
         { }
             public DbSet<Category> Categories { get; set; }
         public DbSet<GezilecekSehirler> GezilecekSehirlers { get; set; }
+        public DbSet<CetImage> CetImages { get; set; }
     }
     }
 
